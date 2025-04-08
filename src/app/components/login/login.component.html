@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="login-container">
+    <form class="login-form">
+      <img src="senati.png" alt="Logo" class="logo">
+  
+      <h1>Iniciar Sesión</h1>
+  
+      <div class="input-group">
+        <label for="usuario">Usuario</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Ingrese su usuario">
+        </div>
+      </div>
+  
+      <div class="input-group">
+        <label for="contrasena">Contraseña</label>
+        <div class="input-wrapper">
+          <input type="{{passwordVisibility?'text':'password'}}" id="contrasena" placeholder="Ingrese su contraseña">
+          <i (click)="changeVisibility()" [classList]="passwordVisibility?'fa-solid fa-eye':'fa-solid fa-eye-slash'" id="togglePassword" style="cursor: pointer;"></i>
+        </div>
+      </div>
+  
+      <button (click)="login()" class="login-btn">Login</button>
+    </form>
+  </div>
+
+  

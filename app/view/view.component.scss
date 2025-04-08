@@ -1,0 +1,79 @@
+mat-toolbar {
+  position: relative;
+  z-index: 5;
+  box-shadow: var(--mat-sys-level3);
+  background: #ffffff;
+  color: var(--azul);
+  transition: width 0.3s ease-in-out;
+  border: 2px solid var(--azul);
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+button[mat-icon-button] {
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--azul);
+    transform: scale(1.1);
+    color: white;
+  }
+}
+
+.content {
+  padding: 24px;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 69px);
+
+}
+
+mat-sidenav {
+  border-radius: 0;
+  background: white;
+  transition: width 0.3s ease-in-out;
+  border: 2px solid var(--azul);
+  transition: width 0.3s ease-in-out !important;
+
+}
+
+mat-sidenav-content {
+  transition: margin-left 0.3s ease-in-out !important;
+  margin: 0px !important;
+  margin-left: 255px !important;
+  padding: 10px !important;
+  border:2px solid var(--azul)
+}
+
+.admin{
+  margin-left: 100px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* Botón de usuario estilizado */
+.usuario-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #ccffd2; /* Verde pastel */
+  }
+}
+
+.usuario-btn mat-icon {
+  margin-right: 5px;
+  color: white;
+}

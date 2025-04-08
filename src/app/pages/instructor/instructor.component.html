@@ -1,0 +1,64 @@
+<label class="inici">Instructor</label>
+<mat-divider></mat-divider>
+
+<div class="example-button-row">
+  <button class="custom-button" (click)="dialogs()">Agregar</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  
+  <!-- Loop over the headers to generate columns dynamically -->
+  <ng-container *ngFor="let item of headers">
+    <ng-container matColumnDef="{{item}}">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #e1e1e1; color: black; text-align: center;">
+        {{item.charAt(0).toUpperCase() + item.slice(1)}}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        
+        <!-- Check if the column is "semestre" or "opciones" to render buttons -->
+        <ng-container *ngIf="item === 'semestre'">
+          <button mat-button>{{element[item]}}</button>
+        </ng-container>
+
+        <ng-container *ngIf="item === 'opciones'">
+          <div class="center-flex">
+          <ng-container *ngFor="let option of element[item]">
+            <button mat-button class="mat-button">{{option}}</button>
+          </ng-container></div>
+        </ng-container>
+
+        <!-- Default rendering for other columns -->
+        <ng-container *ngIf="item !== 'semestre' && item !== 'opciones'">
+          {{element[item]}}
+        </ng-container>
+
+      </td>
+    </ng-container>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="headers"></tr>
+  <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+</table>
+<div id="modal-overlay" class="modal-overlay" *ngIf="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Instructor</h2>
+    <div class="blue-line-separator"></div>
+
+    <label class="nom" for="dni">DNI</label>
+    <input id="dni" type="text" placeholder="Numero del DNI" />
+
+    <label class="nom" for="nombre">Nombre</label>
+    <input id="nombre" type="text" placeholder="Nombre del Instructor" />
+
+    <label class="nom" for="apellido">Apellido</label>
+    <input id="apellido" type="text" placeholder="Apellido del Instructor" />
+
+    <div class="modal-actions">
+      <button class="submit-button" (click)="submitCareer()">Agregar</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel-button" (click)="dialogs()">Cancelar</button>
+    </div>
+  </div>
+</div>
