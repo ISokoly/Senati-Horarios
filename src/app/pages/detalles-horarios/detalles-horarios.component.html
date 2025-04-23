@@ -1,0 +1,150 @@
+<label class="inici">Detalle Horarios</label>
+<mat-divider></mat-divider>
+
+<div class="example-button-row">
+  <button class="custom-button" (click)="abrirModalAgregar()">Agregar</button>
+</div>
+
+<table mat-table [dataSource]="datos" class="demo-table">
+
+  <!-- Día -->
+  <ng-container matColumnDef="dia">
+    <th mat-header-cell *matHeaderCellDef>Día</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.dia }}
+    </td>
+  </ng-container>
+
+  <!-- Lunes -->
+  <ng-container matColumnDef="lunes">
+    <th mat-header-cell *matHeaderCellDef>Lunes<br>24-04-2025</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-card *ngIf="element.dia === '24-04-25'" class="horario-card">
+        <mat-card-content>
+          <div><strong>Hora:</strong> {{ element.time }}</div>
+          <div><strong>Curso:</strong> {{ element.curso }}</div>
+          <div><strong>Docente:</strong> {{ element.docente }}</div>
+          <div><strong>Aula:</strong> {{ element.aula }}</div>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </ng-container>
+
+  <!-- Martes -->
+  <ng-container matColumnDef="martes">
+    <th mat-header-cell *matHeaderCellDef>Martes<br>25-04-2025</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-card *ngIf="element.dia === '25-04-25'" class="horario-card">
+        <mat-card-content>
+          <div><strong>Hora:</strong> {{ element.time }}</div>
+          <div><strong>Curso:</strong> {{ element.curso }}</div>
+          <div><strong>Docente:</strong> {{ element.docente }}</div>
+          <div><strong>Aula:</strong> {{ element.aula }}</div>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </ng-container>
+
+  <!-- Miércoles -->
+  <ng-container matColumnDef="miercoles">
+    <th mat-header-cell *matHeaderCellDef>Miércoles<br>26-04-2025</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-card *ngIf="element.dia === '26-04-25'" class="horario-card">
+        <mat-card-content>
+          <div><strong>Hora:</strong> {{ element.time }}</div>
+          <div><strong>Curso:</strong> {{ element.curso }}</div>
+          <div><strong>Docente:</strong> {{ element.docente }}</div>
+          <div><strong>Aula:</strong> {{ element.aula }}</div>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </ng-container>
+
+  <!-- Jueves -->
+  <ng-container matColumnDef="jueves">
+    <th mat-header-cell *matHeaderCellDef>Jueves<br>27-04-2025</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-card *ngIf="element.dia === '27-04-25'" class="horario-card">
+        <mat-card-content>
+          <div><strong>Hora:</strong> {{ element.time }}</div>
+          <div><strong>Curso:</strong> {{ element.curso }}</div>
+          <div><strong>Docente:</strong> {{ element.docente }}</div>
+          <div><strong>Aula:</strong> {{ element.aula }}</div>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </ng-container>
+
+  <!-- Viernes -->
+  <ng-container matColumnDef="viernes">
+    <th mat-header-cell *matHeaderCellDef>Viernes<br>28-04-2025</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-card *ngIf="element.dia === '28-04-25'" class="horario-card">
+        <mat-card-content>
+          <div><strong>Hora:</strong> {{ element.time }}</div>
+          <div><strong>Curso:</strong> {{ element.curso }}</div>
+          <div><strong>Docente:</strong> {{ element.docente }}</div>
+          <div><strong>Aula:</strong> {{ element.aula }}</div>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </ng-container>
+
+  <!-- Encabezado de la tabla -->
+  <tr mat-header-row *matHeaderRowDef="['lunes', 'martes', 'miercoles', 'jueves', 'viernes']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];"></tr>
+
+</table>
+<div id="modal-overlay" class="modal-overlay" *ngIf="mostrarModalAgregar">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Horario</h2>
+    <div class="blue-line-separator"></div>
+
+    <!-- Campo para seleccionar la fecha -->
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="pickerAgregar" [(ngModel)]="nuevoHorario.selectedFechaAgregar" readonly>
+      <mat-datepicker-toggle matSuffix [for]="pickerAgregar"></mat-datepicker-toggle>
+      <mat-datepicker #pickerAgregar></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Campo para seleccionar el curso -->
+    <mat-form-field appearance="outline">
+      <mat-label>Curso</mat-label>
+      <mat-select [(ngModel)]="nuevoHorario.selectedCursoAgregar">
+        <mat-option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Campo para seleccionar la hora de inicio -->
+    <mat-form-field appearance="outline">
+      <mat-label>Hora Inicio</mat-label>
+      <mat-select [(ngModel)]="nuevoHorario.horaInicioAgregar">
+        <mat-option *ngFor="let hora of horas" [value]="hora">{{ hora }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Campo para seleccionar la hora de fin -->
+    <mat-form-field appearance="outline">
+      <mat-label>Hora Fin</mat-label>
+      <mat-select [(ngModel)]="nuevoHorario.horaFinAgregar">
+        <mat-option *ngFor="let hora of horas" [value]="hora">{{ hora }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Campo para seleccionar el aula -->
+    <mat-form-field appearance="outline">
+      <mat-label>Aula</mat-label>
+      <mat-select [(ngModel)]="nuevoHorario.selectedAulaAgregar">
+        <mat-option *ngFor="let aula of aulas" [value]="aula">{{ aula }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="modal-actions">
+      <button class="submit-button" (click)="agregarHorarioFake()">Agregar Horario</button>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel-button" (click)="cerrarModalAgregar()">Cancelar</button>
+    </div>
+  </div>
+</div>

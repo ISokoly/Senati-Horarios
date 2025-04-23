@@ -18,8 +18,8 @@
         <!-- semestres -->
         <ng-container *ngIf="item === 'semestres'">
           <div class="center-flex">
-            <select [(ngModel)]="element.semestres">
-              <option [ngValue]="null" disabled>Semestres</option>
+            <select [(ngModel)]="element.semestres" (change)="viewCursos(element, element.semestres)">
+              <option [ngValue]="null" disabled selected>Selecciona un semestre</option>
               <option *ngFor="let rom of semestresRomanos; let i = index" [ngValue]="i + 1">
                 {{ rom }}
               </option>

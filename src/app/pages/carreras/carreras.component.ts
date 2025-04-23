@@ -4,6 +4,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 export interface Carreras {
   id: number;
@@ -37,6 +38,7 @@ export class CarrerasComponent {
   dataSource = ELEMENT_DATA;
   careerName: string = '';
   modal:boolean=false
+  constructor(private router: Router) {}
 
   readonly semestresRomanos = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
@@ -53,6 +55,17 @@ export class CarrerasComponent {
       const modal = document.getElementById('modal-overlay');
       if (modal) modal.style.display = 'none';
       alert(`Carrera agregada: ${this.careerName}`);
+    }
+  }
+  viewCursos(element: any, semestre: number) {
+    if (semestre !== null) {
+      const elementSlug = element.name.replace(/\s+/g, '-').toLowerCase();
+  
+      localStorage.setItem('elementData', JSON.stringify(element));
+      localStorage.setItem('semestre', semestre.toString());
+      
+      this.router.navigate([`view/carreras/${elementSlug}/semestre-${this.getSemestreRomano(semestre)}/cursos`]);
+      
     }
   }
 

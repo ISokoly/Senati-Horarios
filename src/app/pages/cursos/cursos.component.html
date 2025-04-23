@@ -1,0 +1,57 @@
+
+<label class="inici">Carreras > {{data.name}} > Semestre - {{getSemestreRomano(semestre)}} > Cursos</label>
+<mat-divider></mat-divider>
+<div></div>
+
+<div class="example-button-row">
+    <button class="custom-button" (click)="dialogs()">Agregar</button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="demo-table">
+
+    <ng-container *ngFor="let item of headers">
+      <ng-container matColumnDef="{{item}}">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #e1e1e1; color: black; text-align: center;">
+          {{item.charAt(0).toUpperCase() + item.slice(1)}}
+        </th>
+        <td mat-cell *matCellDef="let element">
+  
+          <!-- opciones -->
+          <ng-container *ngIf="item === 'opciones'">
+            <div class="center-flex">
+              <ng-container *ngFor="let option of element[item]">
+                <button mat-button class="mat-button">{{option}}</button>
+              </ng-container>
+            </div>
+          </ng-container>
+  
+          <!-- otros campos -->
+          <ng-container *ngIf="item !== 'semestres' && item !== 'opciones'">
+            {{element[item]}}
+          </ng-container>
+        </td>
+      </ng-container>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="headers"></tr>
+    <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+  </table>
+
+<div id="modal-overlay" class="modal-overlay" *ngIf="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Agregar Curso</h2>
+      <div class="blue-line-separator"></div>
+  
+      <div class="modal-body">
+        <label class="nom" for="career-name">Nombre del Curso</label>
+        <input id="career-name" [(ngModel)]="cursoName" type="text" placeholder="Ingrese el nombre de la carrera" />
+      </div>
+  
+      <div class="modal-actions">
+        <button class="submit-button" (click)="submitCareer()">Agregar</button>
+      </div>
+      <div class="modal-actions">
+        <button class="cancel-button" (click)="dialogs()">Cancelar</button>
+      </div>
+    </div>
+  </div>

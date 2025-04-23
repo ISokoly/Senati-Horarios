@@ -1,242 +1,180 @@
-/* horarios.component.scss */
-.contenedor {
-    margin-bottom: 30px;
-  }
-  .inici {
-    font-size: 25px;
-  }
-  
-  .controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  
-    mat-form-field {
-      flex-grow: 1;
-    }
+.inici{
+  font-size: 25px;
+}
+mat-divider{
+    margin-top: 8px;
+}
+.custom-button {
+    background-color: #0a39e4; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: 2px solid #0a39e4; /* Borde de 2px con el mismo color que el fondo */
+    border-radius: 8px; /* Borde redondeado */
+    padding: 8px 15px; /* Relleno del botón */
+    font-size: 16px; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor cuando pasas sobre el botón */
+    transition: background-color 0.3s, border-color 0.3s; /* Transición suave */
+    margin: 10px 0px;
   }
   
-  .demo-table {
-    border-collapse: collapse;
-    border: 2px solid #0938e4;
-    border-radius: 0;
-  
-    th.mat-header-cell,
-    td.mat-cell {
-      text-align: center;
-      background-color: white;
-      color: #0938e4;
-      font-weight: 600;
-      border: 2px solid #0938e4;
-      padding: 6px 10px;
-    }
-  
-    th.mat-header-cell:nth-child(1),
-    td.mat-cell:nth-child(1),
-    th.mat-header-cell:nth-child(2),
-    td.mat-cell:nth-child(2),
-    th.mat-header-cell:nth-child(3),
-    td.mat-cell:nth-child(3),
-    th.mat-header-cell:nth-child(4),
-    td.mat-cell:nth-child(4),
-    th.mat-header-cell:nth-child(5),
-    td.mat-cell:nth-child(5),
-    th.mat-header-cell:nth-child(6),
-    td.mat-cell:nth-child(6),
-    th.mat-header-cell:nth-child(7),
-    td.mat-cell:nth-child(7),
-    th.mat-header-cell:nth-child(8),
-    td.mat-cell:nth-child(8) {
-      width: calc(100% / 8);
-      min-width: calc(100% / 8);
-      max-width: calc(100% / 8);
-    }
+  .custom-button:hover {
+    background-color: #0837b3; /* Color de fondo cuando el mouse pasa por encima */
+    border-color: #0837b3; /* Cambia el color del borde en hover */
   }
   
-  button.mat-button {
-    background-color: #0938e4;
-    color: white;
-    font-weight: 500;
-    border-radius: 12px;
-    margin: 5px;
-    padding: 0px 30px;
-    text-transform: none;
-  
-    &:hover {
-      background-color: #0837b3;
-      border-color: #0837b3;
-    }
-  
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
+  .custom-button:focus {
+    outline: none; /* Elimina el contorno del botón cuando está enfocado */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Añade sombra cuando está enfocado */
   }
-  
-  .schedule-item {
-    background-color: #e9ecef;
-    border-radius: 4px;
-    padding: 8px;
-    margin: 4px 0;
-    display: block;
-    text-align: center;
-    color: #333;
-    font-size: 0.9em;
-  
-    &:nth-child(1) {
-      /* Lunes 7:40 AM - 10:00 AM Matematica */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(2) {
-      /* Lunes Fisica y Quimica */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(3) {
-      /* Miercoles Ingles I */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(4) {
-      /* Miercoles Introduccion a las TI */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(5) {
-      /* Viernes Fisica y Quimica */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(6) {
-      /* Viernes Matematica */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(7) {
-      /* Domingo Ingles I */
-      background-color: #0938e4;
-      color: white;
-    }
-  
-    &:nth-child(8) {
-      /* Domingo Introduccion a las TI */
-      background-color: #0938e4;
-      color: white;
-    }
-  }
-  
-  /* Estilos para los formularios de Angular Material */
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  /* Button container styling */
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+  .center-flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
   }
+
   
-  /* Modal content style */
-  .modal-content {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    width: 400px;
-    min-height: 300px;
-    max-width: 90%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Modal title styling */
-  
-  .modal-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .blue-line-separator {
-    width: 100%;
-    height: 1.5px;
-    background-color: #2563eb; /* azul intenso */
-    border-radius: 1px;
-    margin-top: -15px;
-    margin-bottom: 30px;
-  }
-  /* Input field styling */
-  input.form {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #2563eb;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  /* Button container styling */
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .cancel-button,
-  .submit-button {
-    flex: 1;
-    padding: 10px;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .cancel-button {
-    background-color: #e5e7eb;
-    color: #1f2937;
-  }
-  
-  .cancel-button:hover {
-    background-color: #d1d5db;
-  }
-  
-  .submit-button {
-    background-color: #1d4ed8;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #1e40af;
-  }
-  
-  
+.demo-table {
+  border: 2px solid #0938e4;
+  border-collapse: collapse;
+  border-radius: 0px;
+}
+
+.demo-table th,
+.demo-table td {
+  border: 2px solid #0938e4;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.demo-table th {
+  background-color: white;
+  color: #0938e4;
+  font-weight: 600;
+}
+
+button.mat-button {
+  background-color: #0938e4;
+  color: white;
+  font-weight: 500;
+  border-radius: 12px;
+  margin: 5px;
+  padding: 0px 30px;
+  text-transform: none;
+}
+
+button.mat-button:hover{
+  background-color: #09143f;
+}
+
+ /* Modal overlay style */
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content style */
+.modal-content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  width: 400px;
+  min-height: 300px;
+  max-width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal title styling */
+
+.modal-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.blue-line-separator {
+  width: 100%;
+  height: 1.5px;
+  background-color: #2563eb; /* azul intenso */
+  border-radius: 1px;
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+/* Input field styling */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #2563eb;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Button container styling */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.submit-button {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.cancel-button:hover {
+  background-color: #d1d5db;
+}
+
+.submit-button {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #1e40af;
+}
+
+.selectores {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #0938e4; /* Borde de color azul */
+  border-radius: 3px;
+  background-color: white;
+  color: #0938e4; /* Color de texto azul */
+  outline: none;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
+.selectores:focus {
+  border-color: #0938e4; /* Borde más visible al hacer foco */
+  box-shadow: 0 0 5px rgba(9, 56, 228, 0.5); /* Sombra al hacer foco */
+}
+
+.selectores option {
+  color: #0938e4; /* Color de texto en las opciones */
+}

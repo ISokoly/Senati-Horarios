@@ -7,6 +7,8 @@ import { GruposComponent } from './pages/grupos/grupos.component';
 import { AulasComponent } from './pages/aulas/aulas.component';
 import { CarrerasComponent } from './pages/carreras/carreras.component';
 import { HorariosComponent } from './pages/horarios/horarios.component';
+import { CursosComponent } from './pages/cursos/cursos.component';
+import { DetallesHorariosComponent } from './pages/detalles-horarios/detalles-horarios.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +34,10 @@ export const routes: Routes = [
         component:CarrerasComponent
       },
       {
+        path:'carreras/:nombre_carrera/:semestre/cursos',
+        component:CursosComponent
+      },
+      {
         path:'aulas',
         component:AulasComponent
       },
@@ -46,6 +52,10 @@ export const routes: Routes = [
       {
         path:'horarios',
         component:HorariosComponent
+      },
+      {
+        path:'horarios/detalle_horario',
+        component:DetallesHorariosComponent
       }
     ]
   }

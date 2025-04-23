@@ -1,115 +1,45 @@
-<div class="contenedor">
-  <label class="inici">Horarios</label>
-  <mat-divider></mat-divider>
+<label class="inici">Horarios</label>
+<mat-divider></mat-divider>
 
-  <div class="controls">
-    <mat-form-field appearance="outline">
-      <mat-label>Seleccionar fecha</mat-label>
-      <input matInput [matDatepicker]="picker" value="3/30/2025">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <button mat-button class="mat-button">Consultar</button>
-    <button mat-button (click)="abrirModalAgregar()" class="mat-button">Agregar</button>
-  </div>
-
-  <table mat-table [dataSource]="dataSource" class="demo-table">
-    <ng-container matColumnDef="time" sticky>
-      <th mat-header-cell *matHeaderCellDef class="demo-table time-col">Hora</th>
-      <td mat-cell *matCellDef="let row" class="demo-table time-col">{{row.time}}</td>
-    </ng-container>
-    <ng-container matColumnDef="monday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Lunes<br>24/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.monday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="tuesday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Martes<br>25/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.tuesday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="wednesday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Miércoles<br>26/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.wednesday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="thursday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Jueves<br>27/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.thursday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="friday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Viernes<br>28/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.friday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="saturday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Sábado<br>29/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.saturday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="sunday">
-      <th mat-header-cell *matHeaderCellDef class="demo-table">Domingo<br>30/03/2025</th>
-      <td mat-cell *matCellDef="let row" class="demo-table">
-        <div *ngFor="let item of row.sunday" class="schedule-item">{{item}}</div>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="headers" class="demo-table"></tr>
-    <tr mat-row *matRowDef="let row; columns: headers;" class="demo-table"></tr>
-  </table>
+<div class="example-button-row">
+  <button class="custom-button" (click)="dialogs()">Agregar</button>
 </div>
 
-<div id="modal-overlay" class="modal-overlay" *ngIf="mostrarModalAgregar">
-  <div class="modal-content">
-    <h2 class="modal-title">Agregar Horario</h2>
-    <div class="blue-line-separator"></div>
+<table mat-table [dataSource]="dataSource" class="demo-table">
 
-    <mat-form-field appearance="outline">
-      <mat-label>Fecha</mat-label>
-      <input matInput [matDatepicker]="pickerAgregar" [(ngModel)]="selectedFechaAgregar" readonly>
-      <mat-datepicker-toggle matSuffix [for]="pickerAgregar"></mat-datepicker-toggle>
-      <mat-datepicker #pickerAgregar></mat-datepicker>
-    </mat-form-field>
+  <!-- Loop dinámico por headers -->
+  <ng-container *ngFor="let item of headers">
+    <ng-container matColumnDef="{{item}}">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #e1e1e1; color: black; text-align: center;">
+        {{ item.charAt(0).toUpperCase() + item.slice(1) }}
+      </th>
+      <td mat-cell *matCellDef="let element">
 
-    <mat-form-field appearance="outline">
-      <mat-label>Curso</mat-label>
-      <mat-select [(ngModel)]="selectedCursoAgregar">
-        <mat-option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <!-- Si es opciones -->
+        <ng-container *ngIf="item === 'opciones'">
+          <div class="center-flex">
+            <ng-container *ngFor="let option of element[item]">
+              <button
+                mat-button
+                class="mat-button"
+                (click)="option === 'Ver Horario' ? viewHorario() : null"
+              >
+                {{ option }}
+              </button>
+            </ng-container>
+          </div>
+        </ng-container>
+        
 
-    <mat-form-field appearance="outline">
-      <mat-label>Hora Inicio</mat-label>
-      <mat-select [(ngModel)]="horaInicioAgregar">
-        <mat-option *ngFor="let hora of horas" [value]="hora">{{ hora }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <!-- Resto de campos -->
+        <ng-container *ngIf="item !== 'opciones'">
+          {{ element[item] }}
+        </ng-container>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Hora Fin</mat-label>
-      <mat-select [(ngModel)]="horaFinAgregar">
-        <mat-option *ngFor="let hora of horas" [value]="hora">{{ hora }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      </td>
+    </ng-container>
+  </ng-container>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Aula</mat-label>
-      <mat-select [(ngModel)]="selectedAulaAgregar">
-        <mat-option *ngFor="let aula of aulas" [value]="aula">{{ aula }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="modal-actions">
-      <button class="submit-button" (click)="agregarHorarioFake()">Agregar Horario</button>
-    </div>
-    <div class="modal-actions">
-      <button class="cancel-button" (click)="cerrarModalAgregar()">Cancelar</button>
-    </div>
-  </div>
-</div>
+  <tr mat-header-row *matHeaderRowDef="headers"></tr>
+  <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+</table>

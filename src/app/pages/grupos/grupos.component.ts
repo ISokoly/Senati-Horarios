@@ -16,11 +16,11 @@ export interface Grupos {
 }
 
 const ELEMENT_DATA: Grupos[] = [
-  { id: 1, name: '2025-10-ING-SOFT-S1-01', año: 2025, periodo: 10, carreras:'Ing. de Software con IA', semestre:'I',opciones: ['Cursos'] },
-  { id: 2, name: '2025-10-ING-SOFT-S1-02', año: 2025, periodo: 10, carreras:'Ing. de Software con IA', semestre:'I',opciones: ['Cursos'] },
-  { id: 3, name: '2025-10-DIS-GRA-S2-02', año: 2025, periodo: 10, carreras:'Diseño Grafico', semestre:'II',opciones: ['Cursos'] },
-  { id: 4, name: '2025-10-DIS-GRA-S2-02', año: 2025, periodo: 10, carreras:'Diseño Grafico', semestre:'II',opciones: ['Cursos'] },
-  { id: 5, name: '2025-10-MEC-AUT-S2-01', año: 2025, periodo: 10, carreras:'Mecánica Automotriz', semestre:'III',opciones: ['Cursos'] },
+  { id: 1, name: '2025-10-ING-SOFT-S1-01', año: 2025, periodo: 10, carreras:'Ing. de Software con IA', semestre:'I',opciones: ['Editar', 'Desabilitar'] },
+  { id: 2, name: '2025-10-ING-SOFT-S1-02', año: 2025, periodo: 10, carreras:'Ing. de Software con IA', semestre:'I',opciones: ['Editar', 'Desabilitar'] },
+  { id: 3, name: '2025-10-DIS-GRA-S2-02', año: 2025, periodo: 10, carreras:'Diseño Grafico', semestre:'II',opciones: ['Editar', 'Desabilitar'] },
+  { id: 4, name: '2025-10-DIS-GRA-S2-02', año: 2025, periodo: 10, carreras:'Diseño Grafico', semestre:'II',opciones: ['Editar', 'Desabilitar'] },
+  { id: 5, name: '2025-10-MEC-AUT-S2-01', año: 2025, periodo: 10, carreras:'Mecánica Automotriz', semestre:'III',opciones: ['Editar', 'Eliminar'] },
   { id: 4, name: '2025-10-DIS-GRA-S2-02', año: 2025, periodo: 10, carreras:'Mecánica Automotriz', semestre:'III',opciones: ['Cursos'] }
 ];
 
