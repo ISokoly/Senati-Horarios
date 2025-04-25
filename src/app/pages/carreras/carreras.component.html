@@ -5,6 +5,7 @@
 
 <div class="example-button-row">
   <button class="custom-button" (click)="dialogs()">Agregar</button>
+  <button class="custom-button" style="margin-left: 1rem;" (click)="dialogsCurso()">Agregar Curso</button>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="demo-table">
@@ -47,6 +48,7 @@
   <tr mat-header-row *matHeaderRowDef="headers"></tr>
   <tr mat-row *matRowDef="let row; columns: headers;"></tr>
 </table>
+
 <div id="modal-overlay" class="modal-overlay" *ngIf="modal">
   <div class="modal-content">
     <h2 class="modal-title">Agregar Carrera</h2>
@@ -65,3 +67,42 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Curso -->
+<div id="modal-overlay" class="modal-overlay" *ngIf="modalCurso">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Curso</h2>
+    <div class="blue-line-separator"></div>
+
+    <div class="modal-body">
+      <label class="nom" for="career-name">Nombre del Curso</label>
+      <input id="career-name" [(ngModel)]="cursoValue" type="text" placeholder="Ingrese el nombre de la carrera" />
+    </div>
+    <label class="nom" for="semestre">Escoger semestre</label>
+    <select [(ngModel)]="selectedSemestre" id="semestre" >
+      <option [ngValue]="null" disabled selected>Selecciona un semestre</option>
+        <option  *ngFor="let semestre of semestresRomanosForCurso; let i = index" [ngValue]="i + 1" >
+          {{ semestre.label }}
+        </option>
+    </select>  
+    <label class="nom" for="carrera" style="margin-top: 1rem;" >Escoger carrera</label>
+    <select [(ngModel)]="selectedCarrera" id="carrera">
+      <option [ngValue]="null" disabled selected>Selecciona una carrera</option>
+        <option  *ngFor="let carrera of dataSource; let i = index" [ngValue]="i + 1" >
+          {{ carrera.name }}
+        </option>
+    </select>
+    
+
+
+    <div class="modal-actions">
+      <button class="submit-button" (click)="submitCurso()">Agregar</button>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel-button" (click)="dialogsCurso()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+

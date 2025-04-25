@@ -12,8 +12,12 @@ export interface Carreras {
   semestres: number | null; // <--- permite null
   opciones: string[];
 }
+export interface semestre {
+  id:number;
+  label:string;
+}
 
-const ELEMENT_DATA: Carreras[] = [
+export const ELEMENT_DATA: Carreras[] = [
   { id: 1, name: 'Técnico en Electrónica', semestres: null, opciones: ['Editar', 'Deshabilitar'] },
   { id: 2, name: 'Técnico en Mecánica Automotriz', semestres: null, opciones: ['Editar', 'Deshabilitar'] },
   { id: 3, name: 'Técnico en Computación', semestres: null, opciones: ['Editar', 'Deshabilitar'] },
@@ -50,6 +54,38 @@ export class CarrerasComponent {
     this.modal=!this.modal
   }
 
+  // MODAL DE CURSO
+  modalCurso:boolean=false
+  
+  semestresRomanosForCurso:semestre[] = [
+    { id: 1, label: 'I' },
+    { id: 2, label: 'II' },
+    { id: 3, label: 'III' },
+    { id: 4, label: 'IV' },
+    { id: 5, label: 'V' },
+    { id: 6, label: 'VI' }
+  ];
+  
+  cursoValue?:string
+  selectedSemestre: number | null = null;
+
+  selectedCarrera:number|null=null
+
+  dialogsCurso() {
+    this.modalCurso=!this.modalCurso
+  }
+  submitCurso(){
+    if(this.cursoValue && this.selectedSemestre && this.selectedCarrera){
+      this.dialogsCurso()
+      
+      alert("Curso Agregado.")
+    }
+  }
+  hola(){}
+  // MODAL DE CURSO
+
+
+
   submitCareer() {
     if (this.careerName) {
       const modal = document.getElementById('modal-overlay');
@@ -57,6 +93,8 @@ export class CarrerasComponent {
       alert(`Carrera agregada: ${this.careerName}`);
     }
   }
+
+
   viewCursos(element: any, semestre: number) {
     if (semestre !== null) {
       const elementSlug = element.name.replace(/\s+/g, '-').toLowerCase();

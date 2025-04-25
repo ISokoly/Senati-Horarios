@@ -53,6 +53,20 @@
     <label class="nom" for="apellido">Apellido</label>
     <input id="apellido" type="text" placeholder="Apellido del Instructor" />
 
+    <label class="nom">Selecciona hasta 2 carreras </label>
+    <div style="margin: 1rem 0; height:6rem;overflow-y:auto">
+      <label *ngFor="let item of dataSource2" style="display: flex;align-items:center; margin-bottom: 0.5rem;">
+        <input 
+            style="width:1rem;margin-right: 0.5rem;outline:1px solid var(#0a39e4);"
+          type="checkbox" 
+          [value]="item.id"
+
+        />
+        <span>
+        {{ item.name }}
+      </span>
+      </label>
+    </div>
     <div class="modal-actions">
       <button class="submit-button" (click)="submitCareer()">Agregar</button>
     </div>
