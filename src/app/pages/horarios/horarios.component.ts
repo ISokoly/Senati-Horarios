@@ -20,7 +20,7 @@ export interface Horarios {
 const ELEMENT_DATA: Horarios[] = [
   {
     id: 1,
-    curso: 'Algoritmos y Estructuras de Datos',
+    curso: 'Matemáticas',
     aula: 'A-101',
     grupo: 'S1-01',
     instructor: 'Ing. María González',
@@ -30,7 +30,7 @@ const ELEMENT_DATA: Horarios[] = [
   },
   {
     id: 2,
-    curso: 'Fundamentos de Programación',
+    curso: 'Programación Básica',
     aula: 'B-202',
     grupo: 'S1-02',
     instructor: 'Lic. Pedro Ramos',
@@ -40,7 +40,7 @@ const ELEMENT_DATA: Horarios[] = [
   },
   {
     id: 3,
-    curso: 'Diseño Gráfico Digital',
+    curso: 'Fundamentos de Redes',
     aula: 'C-305',
     grupo: 'S2-01',
     instructor: 'Mtra. Carla Ruiz',
@@ -50,7 +50,7 @@ const ELEMENT_DATA: Horarios[] = [
   },
   {
     id: 4,
-    curso: 'Mecánica de Motores',
+    curso: 'Diseño de Interfaces',
     aula: 'T-110',
     grupo: 'S3-01',
     instructor: 'Ing. Roberto Salinas',
@@ -60,20 +60,10 @@ const ELEMENT_DATA: Horarios[] = [
   },
   {
     id: 5,
-    curso: 'Energías Renovables I',
+    curso: 'Bases de Datos I',
     aula: 'L-201',
     grupo: 'S2-02',
     instructor: 'Ing. Daniela Torres',
-    fechaInicio: '2025-03-04',
-    fechaFin: '2025-07-15',
-    opciones: ['Ver Horario', 'Editar', 'Deshabilitar']
-  },
-  {
-    id: 6,
-    curso: 'Cocina Internacional',
-    aula: 'G-008',
-    grupo: 'S1-03',
-    instructor: 'Chef Ricardo Palma',
     fechaInicio: '2025-03-04',
     fechaFin: '2025-07-15',
     opciones: ['Ver Horario', 'Editar', 'Deshabilitar']
@@ -95,21 +85,63 @@ export class HorariosComponent {
 
   constructor(private router: Router) {}
 
+  careers = ['Técnico en Electrónica', 'Técnico en Mecánica Automotriz', 'Técnico en Computación', 'Técnico en Software', 'Técnico en Diseño Gráfico'];
+  
   readonly semestresRomanos = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+
+  selectedCareer: string = '0';
+  selectedSemester: number = 0;
 
   getSemestreRomano(index: number): string {
     return this.semestresRomanos[index - 1] || '';
   }
 
+  curso: string = '';
+  aula: string = '';
+  instructorSeleccionado: string | null = null;
+  cursoSeleccionado: string = '';
+  aulaSeleccionado: string = '';
+  grupoSeleccionado: string | null = null;
+  fechaInicio: string = '';
+  fechaFin: string = '';
+
+  instructores: string[] = [
+    'Mtra. Laura Pérez',
+    'Ing. Carlos Ramírez',
+    'Lic. Ana Torres',
+    'Diseñadora Patricia Gómez',
+    'Dr. Javier Hernández'
+  ];
+
+  cursos: string[] = ['Matemáticas', 'Programación Básica', 'Fundamentos de Redes', 'Diseño de Interfaces', 'Bases de Datos I'];
+  grupos: string[] = ['2025-10-ING-SOFT-S1-01', '2025-10-ING-SOFT-S1-02', '2025-10-DIS-GRA-S2-02', '2025-10-DIS-GRA-S2-02', '2025-10-MEC-AUT-S2-01'];
+  aulas: string[] = ['A-101', 'B-202', 'C-303', 'D-105', 'E-206'];
+
+  submitHorario() {
+    if (this.grupo) {
+      const modal = document.getElementById('modal-overlay');
+      if (modal) modal.style.display = 'none';
+      alert(
+        `Horario agregado:\nCurso: ${this.curso}, Aula: ${this.aula}, Grupo: ${this.grupo}, Instructor: ${this.instructorSeleccionado}, Fecha Inicio: ${this.fechaInicio}, Fecha Fin: ${this.fechaFin}`
+      );
+    }
+  }
+  
   dialogs() {
     this.modal=!this.modal
   }
 
-  submitCareer() {
-  }
+  viewHorario(semestre: number , carrera: string, curso: string, aula:string) {
 
-  viewHorario() {
-      this.router.navigate([`view/horarios/detalle_horario`]);
+    if (semestre !== null && carrera !== null) {
+  
+      localStorage.setItem('semestre', semestre.toString());
+      localStorage.setItem('carrera', carrera.toString());
       
+      localStorage.setItem('curso', curso.toString());
+      localStorage.setItem('aula', aula.toString());
+
+      this.router.navigate([`view/horarios/detalle_horario`]);
+    }
   }
 }

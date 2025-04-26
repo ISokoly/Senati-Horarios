@@ -1,10 +1,29 @@
 <label class="inici">Horarios</label>
+
 <mat-divider></mat-divider>
 
-<div class="example-button-row">
-  <button class="custom-button" (click)="dialogs()">Agregar</button>
+<div class="important_select">
+  <label for="career" class="etiqueta">Carrera</label>
+  <select class="selectores" id="career" [(ngModel)]="selectedCareer">
+    <option [ngValue]="'0'" disabled selected>Selecciona una Carrera</option>
+    <option *ngFor="let career of careers" [value]="career">{{ career }}</option>
+  </select>
+
+  <label for="semester" class="etiqueta">Semestre</label>
+  <select class="selectores" id="semester" [(ngModel)]="selectedSemester" [disabled]="selectedCareer === '0'">
+    <option [ngValue]="0" disabled selected>Selecciona un Semestre</option>
+    <option *ngFor="let rom of semestresRomanos; let i = index" [value]="i + 1">
+      {{ rom }}
+    </option>
+  </select>
 </div>
 
+<div class="example-button-row">
+  <button class="custom-button" (click)="dialogs()">Agregar Horario</button>
+</div>
+
+@if(selectedSemester !== 0){
+  
 <table mat-table [dataSource]="dataSource" class="demo-table">
 
   <!-- Loop dinámico por headers -->
@@ -22,8 +41,8 @@
               <button
                 mat-button
                 class="mat-button"
-                (click)="option === 'Ver Horario' ? viewHorario() : null"
-              >
+                (click)="option === 'Ver Horario' ? viewHorario(selectedSemester, selectedCareer, element.curso, element.aula) : null"
+                >
                 {{ option }}
               </button>
             </ng-container>
@@ -43,3 +62,54 @@
   <tr mat-header-row *matHeaderRowDef="headers"></tr>
   <tr mat-row *matRowDef="let row; columns: headers;"></tr>
 </table>
+}
+
+<div id="modal-overlay" class="modal-overlay" *ngIf="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Horario</h2>
+    <div class="blue-line-separator"></div>
+
+    <!-- Curso -->
+    <label for="curso">Curso</label>
+    <select class="selectores" id="curso" [(ngModel)]="cursoSeleccionado">
+      <option [ngValue]="null" disabled selected>Selecciona un Curso</option>
+      <option *ngFor="let ins of cursos" [ngValue]="ins">{{ ins }}</option>
+    </select>
+
+    <!-- Aula -->
+    <label for="aula">Aula</label>
+    <select class="selectores" id="aula" [(ngModel)]="aulaSeleccionado">
+      <option [ngValue]="null" disabled selected>Selecciona una Aula</option>
+      <option *ngFor="let ins of aulas" [ngValue]="ins">{{ ins }}</option>
+    </select>
+
+    <!-- Grupo -->
+    <label for="grupo">Grupo</label>
+    <select class="selectores" id="grupo" [(ngModel)]="grupoSeleccionado">
+      <option [ngValue]="null" disabled selected>Selecciona un Grupo</option>
+      <option *ngFor="let ins of grupos" [ngValue]="ins">{{ ins }}</option>
+    </select>
+
+    <!-- Instructor -->
+    <label for="instructor">Instructor</label>
+    <select class="selectores" id="instructor" [(ngModel)]="instructorSeleccionado">
+      <option [ngValue]="null" disabled selected>Selecciona un Instructor</option>
+      <option *ngFor="let ins of instructores" [ngValue]="ins">{{ ins }}</option>
+    </select>
+
+    <!-- Fecha Inicio -->
+    <label for="fechaInicio">Fecha Inicio</label>
+    <input id="fechaInicio" type="date" [(ngModel)]="fechaInicio" class="input" />
+
+    <!-- Fecha Fin -->
+    <label for="fechaFin">Fecha Fin</label>
+    <input id="fechaFin" type="date" [(ngModel)]="fechaFin" class="input" />
+
+    <div class="modal-actions">
+      <button class="submit-button" (click)="submitHorario()">Guardar</button>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel-button" (click)="dialogs()">Cancelar</button>
+    </div>
+  </div>
+</div>

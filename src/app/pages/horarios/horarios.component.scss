@@ -178,3 +178,15 @@ input {
 .selectores option {
   color: #0938e4; /* Color de texto en las opciones */
 }
+
+.important_select {
+  padding: 1.5rem;
+  border: 2px solid #0938e4;
+  border-radius: 10px;
+  background-color: #f5f8ff;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
